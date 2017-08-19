@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			#app {
+				position: relative;
+				width: 800px;
+				height: 400px;
+				margin: 100px auto;
+				border: 1px solid #333; 
+			}
+			.header {
+				position: absolute;
+				width: 80px;
+				height: 100%;
+				border-right: 1px solid #333;
+				left: 0;
+			}
+			.section {
+				position: absolute;
+				left: 80px;
+				right: 0;
+				top: 0;
+				bottom: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="app">
+			<div class="header">
+				<router-link to="/home">home</router-link>
+				<router-link to="/content">content</router-link>
+			</div>
+			<router-view></router-view>
+		</div>
+		<script>
+			const home = {
+				template: `<div class="section">这里是home  
+					<router-link to="/about">about</router-link>
+			    	<router-view></router-view>  
+			  	</div>`
+			}
+			const content = {
+				template: '<div class="section">content</div>'
+			}
+			const about = {
+				template: '<div class="section">about</div>'
+			}
+			const routes = [
+				{
+					path: '/',
+					component: home
+				},
+				{
+					path: '/home',
+					component: home
+				},
+				{
+					path: '/content',
+					component: content
+				},
+				{
+					path: '/about',
+					component: about
+				}
+			]
+			const router = new VueRouter({
+				routes
+			})
+			const app = new Vue({
+				router
+			}).$mount('#app')
+		</script>
+	</body>
+
+</html>
